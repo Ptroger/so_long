@@ -14,11 +14,11 @@ int 	key_hook(int keycode, t_base *base)
 	return (1);
 }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -42,6 +42,7 @@ int	close(int keycode, t_base *base)
 {
 	if (keycode == 53)
 	{
+		mlx_destroy_image(base->mlx, base->img);
 		printf("you pressed %d\n", keycode);
 		mlx_destroy_window(base->mlx, base->win);
 		exit (0);
@@ -49,11 +50,13 @@ int	close(int keycode, t_base *base)
 	return (0);
 }
 
+// TODO: get_data_addr pour recuperer la couleur dans le pixel a afficher
+
 int	main(void)
 {
 	t_base	*base;
-	void	*img;
-	char	*relative_path = "./xpm/tileset_complet.xpm";
+	t_start	start;
+	char	*relative_path = "./xpm/IMG_20210820_143546.xpm";
 	int 	toto;
 	int		img_width;
 	int		img_height;
@@ -61,10 +64,13 @@ int	main(void)
 	base = initialise_window();
 	img_height = HEIGHT;
 	img_width = WIDTH;
+	start.x = 150;
+	start.y = 150;
+	init_tiles(base);
+	draw_tile(base, start, base->antouine);
+	mlx_put_image_to_window(base->mlx, base->win, base->img, start->x, start->y);
 	mlx_key_hook(base->win, key_hook, base);
-	img = mlx_xpm_file_to_image(base->mlx, relative_path, &img_width, &img_height);
-	mlx_put_image_to_window(base->mlx, base->win, img, 0, 0);
-	toto = mlx_hook(base->win, 2, 1L<<0, close, &base);
+	toto = mlx_hook(base->win, 2, 1L<<0, close, base);
 	if (toto == 1)
 		return (0);
 	mlx_loop(base->mlx);
