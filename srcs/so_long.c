@@ -56,19 +56,21 @@ int	main(void)
 {
 	t_base	*base;
 	t_start	start;
-	char	*relative_path = "./xpm/IMG_20210820_143546.xpm";
+//	char	*relative_path = "./xpm/antouine.xpm";
 	int 	toto;
-	int		img_width;
-	int		img_height;
+//	int		img_width;
+//	int		img_height;
 
 	base = initialise_window();
-	img_height = HEIGHT;
-	img_width = WIDTH;
+//	img_height = HEIGHT;
+//	img_width = WIDTH;
 	start.x = 150;
 	start.y = 150;
 	init_tiles(base);
 	draw_tile(base, start, base->antouine);
-	mlx_put_image_to_window(base->mlx, base->win, base->img, start->x, start->y);
+	printf("iciic\n");
+	mlx_put_image_to_window(base->mlx, base->win, base->img, start.x, start.y);
+	printf("ici\n");
 	mlx_key_hook(base->win, key_hook, base);
 	toto = mlx_hook(base->win, 2, 1L<<0, close, base);
 	if (toto == 1)

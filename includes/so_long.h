@@ -25,6 +25,7 @@ typedef struct	s_data {
 typedef struct	s_base {
 	void	*mlx;
 	void	*win;
+	void 	*img;
 	t_data	*antouine;
 	t_data	*wall;
 	t_data	*exit;

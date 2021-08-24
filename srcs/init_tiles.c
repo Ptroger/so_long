@@ -2,11 +2,15 @@
 
 void	init_tiles(t_base *base)
 {
-	int	width;
-	int	height;
+	int	*width;
+	int	*height;
 
-	base->antouine = mlx_xpm_file_to_image(base->mlx, relative_path, &width, &height);
-	base->antouine->width = width;
-	base->antouine->height = height;
+	width = &(base->antouine->width);
+	height = &(base->antouine->height);
+	base->antouine = mlx_xpm_file_to_image(base->mlx, "../xpm/antouine.xpm", width, height);
+	if (base->antouine == 0)
+		printf("clamerde\n");
+	printf("icila\n");
+	printf("ici\n");
 }
 
