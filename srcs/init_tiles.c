@@ -2,15 +2,20 @@
 
 void	init_tiles(t_base *base)
 {
-	int	*width;
-	int	*height;
+	void *img;
+	int	width;
+	int	height;
 
-	width = &(base->antouine->width);
-	height = &(base->antouine->height);
-	base->antouine = mlx_xpm_file_to_image(base->mlx, "../xpm/antouine.xpm", width, height);
-	if (base->antouine == 0)
+	img = mlx_xpm_file_to_image(base->mlx, "./xpm/antouine.xpm", &width, &height);
+	base->antouine->img = img;
+	base->antouine->addr = mlx_get_data_addr(base->antouine->img, &base->antouine->bits_per_pixel,
+											 &base->antouine->line_length, &base->antouine->endian);
+	if (base->antouine->img == 0)
 		printf("clamerde\n");
-	printf("icila\n");
+	else
+	{
+		base->antouine->width = width;
+		base->antouine->height = height;
+	}
 	printf("ici\n");
 }
-

@@ -2,7 +2,8 @@ NAME		= so_long
 
 SRCS        =	srcs/so_long.c \
 				srcs/draw_tile.c \
-				srcs/init_tiles.c
+				srcs/init_tiles.c \
+				srcs/helpers.c
 
 OBJS		= $(SRCS:.c=.o)
 
