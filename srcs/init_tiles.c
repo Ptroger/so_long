@@ -17,5 +17,4 @@ void	init_tiles(t_base *base)
 		base->antouine->width = width;
 		base->antouine->height = height;
 	}
-	printf("ici\n");
 }

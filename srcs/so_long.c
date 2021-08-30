@@ -1,11 +1,6 @@
 #include "../includes/so_long.h"
 #include <stdlib.h>
 
-//void 	draw_texture(t_base *base)
-//{
-//
-//}
-
 int 	key_hook(int keycode, t_base *base)
 {
 	(void)keycode;
@@ -55,20 +50,13 @@ int	close(int keycode, t_base *base)
 	return (0);
 }
 
-// TODO: get_data_addr pour recuperer la couleur dans le pixel a afficher
-
 int	main(void)
 {
 	t_base	*base;
-//	char	*relative_path = "./xpm/antouine.xpm";
 	t_start	start;
 	int 	toto;
-	int		img_width;
-	int		img_height;
 
 	base = initialise_window();
-	img_height = HEIGHT;
-	img_width = WIDTH;
 	start.x = 0;
 	start.y = 0;
 	init_tiles(base);

@@ -38,7 +38,8 @@ typedef struct	s_map {
 
 void	init_tiles(t_base *base);
 void 	draw_tile(t_base *base, t_start start, t_data *tile);
-void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
+void	my_mlx_pixel_put(t_data *img, int x, int y, unsigned int color);
+unsigned int	get_pixel(t_data *tile, int x, int y);
 
 
 #endif
