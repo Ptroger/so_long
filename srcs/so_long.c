@@ -37,7 +37,7 @@ t_base	*initialise_window()
 	return(base);
 }
 
-int	close(int keycode, t_base *base)
+int	close_win(int keycode, t_base *base)
 {
 	if (keycode == 53)
 	{
@@ -53,7 +53,7 @@ int	close(int keycode, t_base *base)
 int	main(void)
 {
 	t_base	*base;
-	t_start	start;
+	t_coord	start;
 	int 	toto;
 
 	base = initialise_window();
@@ -63,7 +63,7 @@ int	main(void)
 	draw_tile(base, start, base->antouine);
 	mlx_put_image_to_window(base->mlx, base->win, base->img->img, 150, 150);
 	mlx_key_hook(base->win, key_hook, base);
-	toto = mlx_hook(base->win, 2, 1L<<0, close, base);
+	toto = mlx_hook(base->win, 2, 1L<<0, close_win, base);
 	if (toto == 1)
 		return (0);
 	mlx_loop(base->mlx);
