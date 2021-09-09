@@ -6,14 +6,13 @@ SRCS        =	srcs/so_long.c \
 				srcs/init_map.c \
 				srcs/helpers.c \
 				srcs/initialize.c \
-				srcs/destroy_vars.c \
 				srcs/destroy_base.c \
-				srcs/init_vars.c \
-				srcs/map_dimensions.c \
 				srcs/map_isvalid.c \
-				srcs/parse_map.c \
 				srcs/read_map.c \
 				srcs/put_img.c \
+				srcs/move.c \
+				srcs/hooks.c \
+				srcs/update.c \
 
 OBJS		= $(SRCS:.c=.o)
 

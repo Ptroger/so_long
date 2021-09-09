@@ -1,5 +1,4 @@
 #include "../includes/so_long.h"
-#include <stdlib.h>
 
 void	close_win(t_base *base)
 {

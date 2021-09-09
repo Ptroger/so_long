@@ -34,19 +34,19 @@ t_data	*initialise_data(t_base *base)
 t_base	*initialise(char *file)
 {
 	t_base	*base;
-	void 	*mlx;
 	void 	*win;
 
 	base = (struct s_base*)malloc(sizeof(t_base));
-	mlx = malloc(sizeof(void*));
 	win = malloc(sizeof(void*));
 	(void)(file);
-	base->mlx = mlx;
-	base->win = win;
 	base->mlx = mlx_init();
+	base->win = win;
 	base->antouine = initialise_data(base);
+	printf("\n\n\n\nici 1\n\n\n\n\n");
 	base->exit = initialise_data(base);
+	printf("\n\n\n\nici 2\n\n\n\n\n");
 	base->floor = initialise_data(base);
+	printf("\n\n\n\nici 3\n\n\n\n\n");
 	base->trumpet = initialise_data(base);
 	base->wall = initialise_data(base);
 	base->img = initialise_data(base);

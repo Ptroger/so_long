@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-static void	parse_file(t_base *base, char buf[], int fd, char **file)
+void	parse_file(t_base *base, char buf[], int fd, char **file)
 {
 	char			*tmp;
 
@@ -16,7 +16,7 @@ static void	parse_file(t_base *base, char buf[], int fd, char **file)
 	}
 }
 
-static void	read_file(t_base *base, char buf[], int fd, char **file)
+void	read_file(t_base *base, char buf[], int fd, char **file)
 {
 	int				ret;
 
@@ -38,7 +38,7 @@ static void	read_file(t_base *base, char buf[], int fd, char **file)
 	}
 }
 
-static char	*init_file(t_base *base, int fd)
+char	*init_file(t_base *base, int fd)
 {
 	char			*file;
 

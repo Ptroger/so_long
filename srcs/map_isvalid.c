@@ -35,7 +35,7 @@ void	map_height(t_base *base, char *file)
 	}
 }
 
-static int	isborder(t_base *base, int i)
+int	isborder(t_base *base, int i)
 {
 	if (i < base->vars->width
 		|| i > (base->vars->width + 1) * (base->vars->height - 1)
@@ -45,7 +45,7 @@ static int	isborder(t_base *base, int i)
 	return (0);
 }
 
-static void	isvalid(t_base *base, char *file, int i)
+void	isvalid(t_base *base, char *file, int i)
 {
 	if (file[i] == 'P')
 		base->vars->player_number++;

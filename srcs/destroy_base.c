@@ -7,6 +7,25 @@ void	error(char *err)
 	ft_putstr_fd(err, 2);
 }
 
+void	destroy_vars(t_vars *vars)
+{
+	int				i;
+
+	if (vars != 0)
+	{
+		if (vars->coll != 0)
+			free(vars->coll);
+		if (vars->map != 0)
+		{
+			i = 0;
+			while (i < vars->height)
+				free(vars->map[i++]);
+			free(vars->map);
+		}
+		free(vars);
+	}
+}
+
 void	destroy_base(t_base *base, char *err)
 {
 	if (base != 0)

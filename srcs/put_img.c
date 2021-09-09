@@ -19,8 +19,6 @@ void	put_map(t_base *base)
 	int				i;
 	int				j;
 	t_coord	start;
-//	printf("width = %d\n", base->vars->width);
-//	printf("height = %d\n", base->vars->height);
 	j = 0;
 	while (j < base->vars->height)
 	{

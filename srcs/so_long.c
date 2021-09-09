@@ -18,6 +18,7 @@ int	isber(char *file)
 int	main(int ac, char **av)
 {
 	t_base	*base;
+	printf("\n\n\n\nici\n\n\n\n\n");
 
 	if (ac != 2 || isber(av[1]) == 0)
 	{
