@@ -12,7 +12,7 @@ static void	parse_file(t_base *base, char buf[], int fd, char **file)
 	if (*file == 0)
 	{
 		close(fd);
-		destroy_base(base, "map_init(): ft_strjoin()");
+		destroy_base(base, "Malloc error");
 	}
 }
 
@@ -28,7 +28,7 @@ static void	read_file(t_base *base, char buf[], int fd, char **file)
 		{
 			free(*file);
 			close(fd);
-			destroy_base(base, "map_init(): read()");
+			destroy_base(base, "read error");
 		}
 		else
 		{
@@ -46,7 +46,7 @@ static char	*init_file(t_base *base, int fd)
 	if (file == 0)
 	{
 		close(fd);
-		destroy_base(base, "map_init(): ft_calloc()");
+		destroy_base(base, "calloc error");
 	}
 	return (file);
 }
@@ -59,7 +59,7 @@ void	init_map(t_base *base, char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		destroy_base(base, path);
+		destroy_base(base, "Open failed");
 	file = init_file(base, fd);
 	read_file(base, buf, fd, &file);
 	close(fd);

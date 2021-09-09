@@ -1,6 +1,40 @@
 #include "../includes/so_long.h"
 #include <stdlib.h>
 
+void	map_width(t_base *base, char *file)
+{
+	base->vars->width = 0;
+	while (file[base->vars->width] && file[base->vars->width] != '\n')
+		base->vars->width++;
+	if (base->vars->width == 0 || file[base->vars->width] == 0)
+	{
+		free(file);
+		destroy_base(base, "Invalid map disposition");
+	}
+}
+
+void	map_height(t_base *base, char *file)
+{
+	int				i;
+	int				j;
+
+	base->vars->height = 1;
+	i = base->vars->width + 1;
+	while (file[i] != 0)
+	{
+		j = 0;
+		while (file[i + j] != 0 && file[i + j] != '\n')
+			j++;
+		if (base->vars->width != j)
+		{
+			free(file);
+			destroy_base(base, "not rectangular");
+		}
+		i += base->vars->width + 1;
+		base->vars->height++;
+	}
+}
+
 static int	isborder(t_base *base, int i)
 {
 	if (i < base->vars->width
@@ -24,7 +58,7 @@ static void	isvalid(t_base *base, char *file, int i)
 	else
 	{
 		free(file);
-		destroy_base(base, "map content is invalid");
+		destroy_base(base, "wrong char");
 	}
 }
 
@@ -42,7 +76,7 @@ void	map_isvalid(t_base *base, char *file)
 			if (file[i] != '1')
 			{
 				free(file);
-				destroy_base(base, "map isn't surrounded by walls");
+				destroy_base(base, "expected wall");
 			}
 		}
 		else
@@ -53,6 +87,6 @@ void	map_isvalid(t_base *base, char *file)
 		|| base->vars->colls < 1)
 	{
 		free(file);
-		destroy_base(base, "map configuration is invalid");
+		destroy_base(base, "Game setup won't work");
 	}
 }

@@ -1,25 +1,42 @@
 #include "../includes/so_long.h"
 
+void	put_vars(int i, int j, t_base *base, t_coord start)
+{
+	int	n;
+
+	if (base->vars->exit.x == i && base->vars->exit.y == j)
+			draw_tile(base, start, base->exit);
+	n = -1;
+	while (++n < base->vars->colls)
+		if (base->vars->coll[n].x == i && base->vars->coll[n].y == j)
+			draw_tile(base, start, base->trumpet);
+	if (base->vars->player.x == i && base->vars->player.y == j)
+		draw_tile(base, start, base->antouine);
+}
+
 void	put_map(t_base *base)
 {
+	int				i;
+	int				j;
 	t_coord	start;
-
-	start.y = 0;
-	printf("wifth = %d\n", base->vars->width);
-	printf("height = %d\n", base->vars->height);
-	while (start.y < base->vars->width)
+//	printf("width = %d\n", base->vars->width);
+//	printf("height = %d\n", base->vars->height);
+	j = 0;
+	while (j < base->vars->height)
 	{
-		start.x = 0;
-		while (start.x < base->vars->height)
+		i = 0;
+		while (i < base->vars->width)
 		{
-			printf("x == %d\ny == %d\n", start.x, start.y);
-			if (base->vars->map[start.x][start.y] == 1)
+			start.y = j * 64;
+			start.x = i * 64;
+			if (base->vars->map[j][i] == 1)
 				draw_tile(base, start, base->wall);
 			else
 				draw_tile(base, start, base->floor);
-			start.x++;
+			put_vars(i, j, base, start);
+			i++;
 		}
-		start.y++;
+		j++;
 	}
 }
 

@@ -11,7 +11,7 @@ void	put_tiles(t_base *base, char *path, t_data *tile)
 	tile->addr = mlx_get_data_addr(tile->img, &tile->bits_per_pixel
 								,&tile->line_length, &tile->endian);
 	if (tile->img == 0)
-		printf("jesaispasencore\n");
+		destroy_base(base, "mlx failed");
 	else
 	{
 		tile->width = width;
