@@ -1,5 +1,20 @@
 #include "../includes/so_long.h"
 #include <stdlib.h>
+#include "../includes/libft.h"
+
+int	isber(char *file)
+{
+	int				len;
+
+	len = ft_strlen(file);
+	if (file == 0)
+		return (0);
+	if (len < 5)
+		return (0);
+	if (ft_strncmp(file + len - 4, ".ber", 4) != 0)
+		return (0);
+	return (1);
+}
 
 int 	key_hook(int keycode, t_base *base)
 {
@@ -7,34 +22,6 @@ int 	key_hook(int keycode, t_base *base)
 	(void)base;
 	printf("you pressed %d\n", keycode);
 	return (1);
-}
-
-t_data	*initialise_data(t_base *base)
-{
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	data->img = mlx_new_image(base->mlx, WIDTH, HEIGHT);
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);
-	return (data);
-}
-
-t_base	*initialise_window()
-{
-	t_base	*base;
-	void 	*mlx;
-	void 	*win;
-
-	base = (struct s_base*)malloc(sizeof(t_base));
-	mlx = malloc(sizeof(void*));
-	win = malloc(sizeof(void*));
-	base->mlx = mlx;
-	base->win = win;
-	base->mlx = mlx_init();
-	base->antouine = initialise_data(base);
-	base->img = initialise_data(base);
-	base->win = mlx_new_window(base->mlx, WIDTH, HEIGHT, "so_long");
-	return(base);
 }
 
 int	close_win(int keycode, t_base *base)
@@ -50,18 +37,18 @@ int	close_win(int keycode, t_base *base)
 	return (0);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_base	*base;
-	t_coord	start;
 	int 	toto;
 
-	base = initialise_window();
-	start.x = 0;
-	start.y = 0;
-	init_tiles(base);
-	draw_tile(base, start, base->antouine);
-	mlx_put_image_to_window(base->mlx, base->win, base->img->img, 150, 150);
+	if (ac != 2 || isber(av[1]) == 0)
+	{
+		ft_putstr_fd("usage: ./so_long [map.ber]", 2);
+		return (-1);
+	}
+	base = initialise(av[1]);
+	put_img(base);
 	mlx_key_hook(base->win, key_hook, base);
 	toto = mlx_hook(base->win, 2, 1L<<0, close_win, base);
 	if (toto == 1)

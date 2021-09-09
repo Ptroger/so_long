@@ -3,13 +3,24 @@ NAME		= so_long
 SRCS        =	srcs/so_long.c \
 				srcs/draw_tile.c \
 				srcs/init_tiles.c \
-				srcs/helpers.c
+				srcs/init_map.c \
+				srcs/helpers.c \
+				srcs/initialize.c \
+				srcs/destroy_vars.c \
+				srcs/destroy_base.c \
+				srcs/init_vars.c \
+				srcs/map_dimensions.c \
+				srcs/map_isvalid.c \
+				srcs/parse_map.c \
+				srcs/read_map.c \
+				srcs/put_img.c \
 
 OBJS		= $(SRCS:.c=.o)
 
 CC			= gcc
 RM			= rm -f
 FLAGS		= -Wall -Wextra -Werror
+LIBFT		= ./libft/libft.a
 LIBS		= -framework OpenGL -framework AppKit -lm
 MLX			= libmlx.dylib
 INCLUDES	= -I./includes
@@ -31,21 +42,23 @@ _WHITE=$'\x1b[37m'
 all:			$(NAME)
 
 $(NAME):		$(MLX) $(OBJS)
-				@$(CC) ${FLAGS} $(INCLUDES) $(SRCS) -o ${NAME} ${LIBS} $(MLX)
+				@$(CC) ${FLAGS} $(INCLUDES) $(SRCS) -o ${NAME} ${LIBS} $(MLX) $(LIBFT)
 				@echo $(_BOLD)$(_GREEN)"so_long ready 🥑"
 
 $(MLX):
 				@$(MAKE) -C mlx
 				@cp mlx/$(MLX) .
 				@echo $(_BOLD)$(_CYAN)"mlx compiled"
+				@$(MAKE) -C libft
 
 clean:
 				@$(MAKE) -C mlx clean
+				@$(MAKE) -C libft clean
 				@rm -rf $(OBJS) $(BONUS_OBJS)
 				@echo $(_BOLD)$(_PURPLE)"object files removed"
 
 fclean:			clean
-				@rm -rf $(NAME) $(MLX)
+				@rm -rf $(NAME) $(MLX) $(LIBFT)
 				@echo $(_BOLD)$(_PURPLE)"binary removed"
 
 re:				fclean $(NAME)

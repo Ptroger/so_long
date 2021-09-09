@@ -13,24 +13,23 @@ typedef struct	s_coord {
 	int y;
 }				t_coord;
 
-typedef struct s_game
+typedef struct s_vars
 {
 	int				**map;
 	int				height;
 	int				width;
 	t_coord			*coll;
-	int				count_coll;
-	int				count_exit;
-	int				count_player;
+	int				colls;
+	int				is_exit;
+	int				player_number;
 	int				player_up;
 	int				player_down;
 	int				player_left;
 	int				player_right;
 	int				player_move;
-	int				player_coll;
 	t_coord			player;
 	t_coord			exit;
-}				t_game;
+}				t_vars;
 
 typedef struct	s_data {
 	void	*img;
@@ -47,23 +46,27 @@ typedef struct	s_base {
 	void	*win;
 	t_data 	*img;
 	t_data	*antouine;
+	t_data	*trumpet;
 	t_data	*wall;
 	t_data	*exit;
-	t_data	*blank;
+	t_data	*floor;
+	t_vars	*vars;
 }				t_base;
-
-typedef struct	s_map {
-
-}				t_map;
 
 void	init_tiles(t_base *base);
 void 	draw_tile(t_base *base, t_coord start, t_data *tile);
 void	my_mlx_pixel_put(t_data *img, int x, int y, unsigned int color);
 unsigned int	get_pixel(t_data *tile, int x, int y);
-void	init_map(t_base *base, char *filename);
-void	destroy_base(t_base *base, char *errmsg, int errnum);
+void	init_vars(t_base *base, char *file);
+void	init_map(t_base *base, char *file);
+void	destroy_base(t_base *base, char *errmsg);
+void	destroy_vars(t_vars *vars);
 void	read_map(t_base *base, char *file);
-void	map_parse(t_base *base, char *file);
+void	parse_map(t_base *base, char *file);
 void	map_isvalid(t_base *base, char *file);
+void	map_width(t_base *base, char *file);
+void	map_height(t_base *base, char *file);
+t_base	*initialise(char *file);
+void	put_img(t_base *base);
 
 #endif

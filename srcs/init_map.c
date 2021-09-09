@@ -1,7 +1,8 @@
 #include "../includes/so_long.h"
 #include <stdlib.h>
+#include <fcntl.h>
 
-static void	parse_file(t_base *base, char **file, char buf[], int fd)
+static void	parse_file(t_base *base, char buf[], int fd, char **file)
 {
 	char			*tmp;
 
@@ -11,11 +12,11 @@ static void	parse_file(t_base *base, char **file, char buf[], int fd)
 	if (*file == 0)
 	{
 		close(fd);
-		destroy_base(base, "map_init(): ft_strjoin()", errno);
+		destroy_base(base, "map_init(): ft_strjoin()");
 	}
 }
 
-static void	read_file(t_base *base, char **file, char buf[], int fd)
+static void	read_file(t_base *base, char buf[], int fd, char **file)
 {
 	int				ret;
 
@@ -27,12 +28,12 @@ static void	read_file(t_base *base, char **file, char buf[], int fd)
 		{
 			free(*file);
 			close(fd);
-			destroy_base(base, "map_init(): read()", errno);
+			destroy_base(base, "map_init(): read()");
 		}
 		else
 		{
 			buf[ret] = 0;
-			parse_file(base, file, buf, fd);
+			parse_file(base, buf, fd, file);
 		}
 	}
 }
@@ -45,22 +46,22 @@ static char	*init_file(t_base *base, int fd)
 	if (file == 0)
 	{
 		close(fd);
-		destroy_base(base, "map_init(): ft_calloc()", errno);
+		destroy_base(base, "map_init(): ft_calloc()");
 	}
 	return (file);
 }
 
-void	init_map(t_base *base, char *filename)
+void	init_map(t_base *base, char *path)
 {
-	int				fd;
-	char			*file;
-	char			buf[1024 + 1];
+	char	*file;
+	int		fd;
+	char	buf[1024 + 1];
 
-	fd = open(filename, O_RDONLY);
+	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		destroy_base(base, filename, errno);
+		destroy_base(base, path);
 	file = init_file(base, fd);
-	read_file(base, &file, buf, fd);
+	read_file(base, buf, fd, &file);
 	close(fd);
 	read_map(base, file);
 	free(file);
