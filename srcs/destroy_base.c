@@ -26,24 +26,35 @@ void	destroy_vars(t_vars *vars)
 	}
 }
 
+void	destroy_image(void *mlx, t_data *data, char *err)
+{
+	(void)err;
+	if (data->init == 1)
+		mlx_destroy_image(mlx, data->img);
+	free(data);
+}	
+
 void	destroy_base(t_base *base, char *err)
 {
 	if (base != 0)
 	{
+		printf("\nicici\n");
 		if (base->floor != 0)
-			mlx_destroy_image(base->mlx, base->floor->img);
+			destroy_image(base->mlx, base->floor, err);
 		if (base->wall != 0)
-			mlx_destroy_image(base->mlx, base->wall->img);
+			destroy_image(base->mlx, base->wall, err);
 		if (base->trumpet != 0)
-			mlx_destroy_image(base->mlx, base->trumpet->img);
+			destroy_image(base->mlx, base->antouine, err);
 		if (base->exit != 0)
-			mlx_destroy_image(base->mlx, base->exit->img);
+			destroy_image(base->mlx, base->trumpet, err);
 		if (base->antouine != 0)
-			mlx_destroy_image(base->mlx, base->antouine->img);
+			destroy_image(base->mlx, base->exit, err);
 		if (base->img != 0)
-			mlx_destroy_image(base->mlx, base->img->img);
+			destroy_image(base->mlx, base->img, err);
 		if (base->win != 0)
 			mlx_destroy_window(base->mlx, base->win);
+		if (base->mlx != 0)
+			mlx_destroy_display(base->mlx);
 		if (base->vars != 0)
 			destroy_vars(base->vars);
 		free(base);

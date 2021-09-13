@@ -36,6 +36,7 @@ typedef struct s_vars
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
+	int	init;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
