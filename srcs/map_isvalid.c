@@ -66,6 +66,7 @@ void	check_map(t_base *base, char *file)
 	write_map(base, file);
 	free(file);
 	map_isvalid(base);
+	printf("players = %d\nexits = %d\n, colls = %d\n", base->vars->player_number, base->vars->exits, base->vars->colls);
 	if (base->vars->player_number != 1
 		|| base->vars->exits < 1
 		|| base->vars->colls < 1)
