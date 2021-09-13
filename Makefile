@@ -20,8 +20,8 @@ CC			= gcc
 RM			= rm -f
 FLAGS		= -Wall -Wextra -Werror
 LIBFT		= ./libft/libft.a
-LIBS		= -framework OpenGL -framework AppKit -lm
-MLX			= libmlx.dylib
+LIBS		= -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+MLX		= mlx/Makefile.gen
 INCLUDES	= -I./includes
 
 # Colors
@@ -41,12 +41,10 @@ _WHITE=$'\x1b[37m'
 all:			$(NAME)
 
 $(NAME):		$(MLX) $(OBJS)
-				@$(CC) ${FLAGS} $(INCLUDES) $(SRCS) -o ${NAME} ${LIBS} $(MLX) $(LIBFT)
-				@echo $(_BOLD)$(_GREEN)"so_long ready 🥑"
+				@$(CC) ${FLAGS} $(INCLUDES) $(SRCS) -o ${NAME} ${LIBS} $(LIBFT)
 
 $(MLX):
 				@$(MAKE) -C mlx
-				@cp mlx/$(MLX) .
 				@echo $(_BOLD)$(_CYAN)"mlx compiled"
 				@$(MAKE) -C libft
 

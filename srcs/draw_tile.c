@@ -15,7 +15,7 @@ void	draw_tile(t_base *base, t_coord start, t_data *tile)
 			color = get_pixel(tile, x, y);
 			if (color != 0x000000)
 				my_mlx_pixel_put(base->img, (start.x) + x,
-				(start.y) + y, color);
+					(start.y) + y, color);
 			y++;
 		}
 		x++;

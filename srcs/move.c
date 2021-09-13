@@ -4,7 +4,7 @@ void	move_up(t_base *base)
 {
 	int	x;
 	int	y;
-	
+
 	x = base->vars->player.x;
 	y = base->vars->player.y;
 	if (base->vars->map[y - 1][x] == 0)

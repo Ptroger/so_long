@@ -31,7 +31,7 @@ t_data	*initialise_data(t_base *base, int i)
 	{
 		data->img = mlx_new_image(base->mlx, WIDTH, HEIGHT);
 		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
-					&data->line_length, &data->endian);
+				&data->line_length, &data->endian);
 		data->init = 1;
 	}
 	return (data);
@@ -42,7 +42,6 @@ t_base	*initialise(char *file)
 	t_base	*base;
 
 	base = (struct s_base *)malloc(sizeof(t_base));
-	(void)(file);
 	base->mlx = 0;
 	base->win = 0;
 	base->antouine = initialise_data(base, 1);
@@ -52,8 +51,8 @@ t_base	*initialise(char *file)
 	base->wall = initialise_data(base, 1);
 	base->img = 0;
 	init_vars(base, file);
-	base->win = mlx_new_window(base->mlx, WIDTH, HEIGHT, "so_long");
 	base->mlx = mlx_init();
+	base->win = mlx_new_window(base->mlx, WIDTH, HEIGHT, "so_long");
 	base->img = initialise_data(base, 0);
 	init_tiles(base);
 	return (base);

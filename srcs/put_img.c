@@ -19,7 +19,7 @@ void	put_map(t_base *base)
 	int		i;
 	int		j;
 	t_coord	start;
-	
+
 	j = 0;
 	while (j < base->vars->height)
 	{
