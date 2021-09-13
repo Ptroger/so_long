@@ -30,8 +30,8 @@ t_data	*initialise_data(t_base *base, int i)
 	if (i == 0)
 	{
 		data->img = mlx_new_image(base->mlx, WIDTH, HEIGHT);
-		data->addr = mlx_get_data_addr(data->img,
-			&data->bits_per_pixel, &data->line_length, &data->endian);
+		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
+									   &data->line_length, &data->endian);
 		data->init = 1;
 	}
 	return (data);
