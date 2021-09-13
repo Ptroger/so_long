@@ -38,7 +38,6 @@ void	destroy_base(t_base *base, char *err)
 {
 	if (base != 0)
 	{
-		printf("\nicici\n");
 		if (base->floor != 0)
 			destroy_image(base->mlx, base->floor, err);
 		if (base->wall != 0)

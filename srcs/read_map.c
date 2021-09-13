@@ -68,7 +68,7 @@ void	read_map(t_base *base, char *file)
 	map_height(base, file);
 	map_isvalid(base, file);
 	base->vars->coll
-	= (t_coord *)malloc(sizeof(t_coord) * base->vars->colls);
+		= (t_coord *)malloc(sizeof(t_coord) * base->vars->colls);
 	if (base->vars->coll == 0)
 	{
 		free(file);

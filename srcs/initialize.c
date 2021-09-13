@@ -30,7 +30,8 @@ t_data	*initialise_data(t_base *base, int i)
 	if (i == 0)
 	{
 		data->img = mlx_new_image(base->mlx, WIDTH, HEIGHT);
-		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);
+		data->addr = mlx_get_data_addr(data->img,
+			&data->bits_per_pixel, &data->line_length, &data->endian);
 		data->init = 1;
 	}
 	return (data);
@@ -40,7 +41,7 @@ t_base	*initialise(char *file)
 {
 	t_base	*base;
 
-	base = (struct s_base*)malloc(sizeof(t_base));
+	base = (struct s_base *)malloc(sizeof(t_base));
 	(void)(file);
 	base->mlx = 0;
 	base->win = 0;
@@ -55,5 +56,5 @@ t_base	*initialise(char *file)
 	base->mlx = mlx_init();
 	base->img = initialise_data(base, 0);
 	init_tiles(base);
-	return(base);
+	return (base);
 }

@@ -28,7 +28,7 @@ void	collect(t_base *base)
 	while (i < base->vars->colls)
 	{
 		if (base->vars->player.x == base->vars->coll[i].x
-		&& base->vars->player.y == base->vars->coll[i].y)
+			&& base->vars->player.y == base->vars->coll[i].y)
 		{
 			base->vars->coll[i].x = -1;
 			base->vars->coll[i].y = -1;
@@ -45,7 +45,7 @@ void	update(t_base *base)
 	collect(base);
 	put_img(base);
 	if (base->vars->player.x == base->vars->exit.x
-	&& base->vars->player.y == base->vars->exit.y)
+		&& base->vars->player.y == base->vars->exit.y)
 	{
 		if (base->vars->colls == base->vars->collected)
 			destroy_base(base, "finished");

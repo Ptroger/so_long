@@ -5,10 +5,10 @@ void	close_win(t_base *base)
 	destroy_base(base, "finished");
 }
 
-void key_press(int keycode, t_base *base)
+void	key_press(int keycode, t_base *base)
 {
 	if (keycode == 65307 || keycode == 119 || keycode == 115
-	|| keycode == 97 || keycode == 100)
+		|| keycode == 97 || keycode == 100)
 	{
 		if (keycode == 65307)
 			close_win(base);
@@ -24,7 +24,7 @@ void key_press(int keycode, t_base *base)
 	}
 }
 
-void key_release(int keycode, t_base *base)
+void	key_release(int keycode, t_base *base)
 {
 	if (keycode == 119 || keycode == 115
 		|| keycode == 97 || keycode == 100)
