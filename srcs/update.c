@@ -20,7 +20,7 @@ void	move_player(t_base *base)
 	}
 }
 
-void	is_exit(t_base *base)
+int	is_exit(t_base *base)
 {
 	int	i;
 

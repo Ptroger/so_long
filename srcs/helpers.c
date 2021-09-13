@@ -1,4 +1,5 @@
 #include "../includes/so_long.h"
+#include <stdlib.h>
 
 void	get_w(t_base *base, char *file)
 {

@@ -4,8 +4,12 @@ void	put_vars(int i, int j, t_base *base, t_point start)
 {
 	int	n;
 
-	if (base->vars->exit.x == i && base->vars->exit.y == j)
-		draw_tile(base, start, base->exit);
+	n = -1;
+	while (++n < base->vars->exits)
+	{
+		if (base->vars->exit[n].x == i && base->vars->exit[n].y == j)
+			draw_tile(base, start, base->exit);
+	}
 	n = -1;
 	while (++n < base->vars->colls)
 		if (base->vars->coll[n].x == i && base->vars->coll[n].y == j)
