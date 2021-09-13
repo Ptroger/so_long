@@ -1,92 +1,71 @@
 #include "../includes/so_long.h"
 #include <stdlib.h>
 
-void	map_width(t_base *base, char *file)
+void	check_char(t_base *base, char c)
 {
-	base->vars->width = 0;
-	while (file[base->vars->width] && file[base->vars->width] != '\n')
-		base->vars->width++;
-	if (base->vars->width == 0 || file[base->vars->width] == 0)
-	{
-		free(file);
-		destroy_base(base, "Invalid map disposition");
-	}
-}
-
-void	map_height(t_base *base, char *file)
-{
-	int				i;
-	int				j;
-
-	base->vars->height = 1;
-	i = base->vars->width + 1;
-	while (file[i] != 0)
-	{
-		j = 0;
-		while (file[i + j] != 0 && file[i + j] != '\n')
-			j++;
-		if (base->vars->width != j)
-		{
-			free(file);
-			destroy_base(base, "not rectangular");
-		}
-		i += base->vars->width + 1;
-		base->vars->height++;
-	}
-}
-
-int	isborder(t_base *base, int i)
-{
-	if (i < base->vars->width
-		|| i > (base->vars->width + 1) * (base->vars->height - 1)
-		|| i % (base->vars->width + 1) == 0
-		|| i % (base->vars->width + 1) == base->vars->width - 1)
-		return (1);
-	return (0);
-}
-
-void	isvalid(t_base *base, char *file, int i)
-{
-	if (file[i] == 'P')
+	if (c == 'P')
 		base->vars->player_number++;
-	else if (file[i] == 'E')
-		base->vars->is_exit++;
-	else if (file[i] == 'C')
+	else if (c == 'E')
+		base->vars->exits++;
+	else if (c == 'C')
 		base->vars->colls++;
-	else if (file[i] == '1' || file[i] == '0')
-		return ;
+	else if (c == '1' || c == '0')
+		return
 	else
-	{
-		free(file);
 		destroy_base(base, "wrong char");
+}
+
+void	write_map(t_base *base, char *file)
+{
+	int		i;
+	size_t	n;
+	int 	j;
+
+	j = -1;
+	n = 0;
+	i = -1;
+	while (++j < base->vars->height)
+	{
+		while (++i < base->vars->width)
+		{
+			base->map[i][j] = file[n];
+			n++;
+		}
 	}
 }
 
-void	map_isvalid(t_base *base, char *file)
+void	check_wall(t_base *base, int i, int j)
 {
-	int				i;
+	if (base->vars->map[i][j] != '1')
+			destroy_base(base, "expected wall");
+}
+
+void	map_isvalid(t_base *base)
+{
+	int	i;
+	int	j;
 
 	i = -1;
-	while (file[++i] != 0)
+	j = -1;
+	while (++j < base->vars->height)
 	{
-		if (file[i] == '\n')
-			continue ;
-		if (isborder(base, i))
+		while (++i < base->vars->width)
 		{
-			if (file[i] != '1')
-			{
-				free(file);
-				destroy_base(base, "expected wall");
-			}
+			if (j == 0 || j == base->vars->height || i == 0 || i == base->vars->width)
+				check_wall(base, i, j);
+			else
+				check_char(base, base->vars->map[i][j]);
 		}
-		else
-			isvalid(base, file, i);
 	}
+}
+
+void	check_map(t_base *base, char *file)
+{
+	write_map(base, file);
+	free(file);
+	map_isvalid(base);
 	if (base->vars->player_number != 1
-		|| base->vars->is_exit != 1
+		|| base->vars->exits < 1
 		|| base->vars->colls < 1)
-	{
-		free(file);
 		destroy_base(base, "Game setup won't work");
-	}
 }

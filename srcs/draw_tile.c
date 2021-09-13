@@ -1,6 +1,6 @@
 #include "../includes/so_long.h"
 
-void	draw_tile(t_base *base, t_coord start, t_data *tile)
+void	draw_tile(t_base *base, t_point start, t_data *tile)
 {
 	int				x;
 	int				y;

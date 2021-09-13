@@ -1,7 +1,7 @@
 #include "../includes/so_long.h"
 #include <stdlib.h>
 
-static void	free_matrix(t_base *base, char *file, int **m, int size)
+void	free_map(t_base *base, int **m, int size)
 {
 	int				i;
 
@@ -10,75 +10,77 @@ static void	free_matrix(t_base *base, char *file, int **m, int size)
 		free(m[i++]);
 	free(m);
 	base->vars->map = 0;
-	free(file);
 	destroy_base(base, "malloc failed");
 }
 
-static void	get_coord(t_base *base, char *file, int k, int *obj)
+void	get_elem(t_base *base, int i, int j, int *colls, int *exits)
 {
-	if (file[k] == 'P')
+	if (base->vars->map[i][j] == 'P')
 	{
-		base->vars->player.x = k % (base->vars->width + 1);
-		base->vars->player.y = k / (base->vars->width + 1);
-		file[k] = '0';
+		base->vars->player.x = i;
+		base->vars->player.y = j;
+		base->vars->map[i][j] = '0';
 	}
-	else if (file[k] == 'E')
+	else if (base->vars->map[i][j] == 'E')
 	{
-		base->vars->exit.x = k % (base->vars->width + 1);
-		base->vars->exit.y = k / (base->vars->width + 1);
-		file[k] = '0';
+		base->vars->exit[*exits].x = i);
+		base->vars->exit[*exits].y = j);
+		base->vars->map[i][j] = '0';
+		(*exits)++;
 	}
-	else if (file[k] == 'C')
+	else if (base->vars->map[i][j] == 'C')
 	{
-		base->vars->coll[*obj].x = k % (base->vars->width + 1);
-		base->vars->coll[*obj].y = k / (base->vars->width + 1);
-		file[k] = '0';
-		(*obj)++;
+		base->vars->coll[*colls].x = i;
+		base->vars->coll[*colls].y = j;
+		base->vars->map[i][j] = '0';
+		(*colls)++;
 	}
 }
 
-void	parse_map(t_base *base, char *file)
+void	parse_map(t_base *base)
 {
-	int				i;
-	int				j;
-	int				k;
-	int				obj;
+	int	i:
+	int	j;
+	int	colls;
+	int	exits;
 
-	obj = 0;
-	k = 0;
+	colls = 0;
+	exits = 0;
+	i = -1;
 	j = -1;
-	while (++j < base->vars->height)
+	while (++j < base->map->height)
 	{
-		base->vars->map[j] = (int *)malloc(sizeof(int) * base->vars->width);
-		if (base->vars->map[j] == 0)
-			free_matrix(base, file, base->vars->map, j);
-		i = 0;
-		while (i < base->vars->width)
-		{
-			get_coord(base, file, k, &obj);
-			base->vars->map[j][i++] = file[k++] - 48;
-		}
-		k++;
+		while (++i < base->map->width)
+			get_elem(base, i, j, &colls, &exits);
+	}
+}
+
+void	alloc_map(t_base *base)
+{
+	int	i;
+
+	i = -1;
+	base->vars->map = (int **)malloc(sizeof(int *) * base->vars->width);
+	if (base->vars->map == 0)
+		destroy_base(base, "malloc failed");
+	while (++i < base->vars->width)
+	{
+		base->vars->map[i] = (int *)malloc(sizeof(int) * base->vars->height);
+		if (base->vars->map[i] == 0)
+			free_map(base, file, base->vars->map, i);
 	}
 }
 
 void	read_map(t_base *base, char *file)
 {
-	map_width(base, file);
-	map_height(base, file);
-	map_isvalid(base, file);
+	map_dimensions(base, file);
+	alloc_map(base);
+	check_map(base);
 	base->vars->coll
-		= (t_coord *)malloc(sizeof(t_coord) * base->vars->colls);
-	if (base->vars->coll == 0)
-	{
-		free(file);
+		= (t_point *)malloc(sizeof(t_point) * base->vars->colls);
+	base->vars->exit
+			= (t_point *)malloc(sizeof(t_point) * base->vars->exits);
+	if (base->vars->coll == 0 || base->vars->exit == 0)
 		destroy_base(base, "malloc failed");
-	}
-	base->vars->map = (int **)malloc(sizeof(int *) * base->vars->height);
-	if (base->vars->map == 0)
-	{
-		free(file);
-		destroy_base(base, "malloc failed");
-	}
-	parse_map(base, file);
+	parse_map(base);
 }

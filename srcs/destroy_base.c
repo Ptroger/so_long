@@ -15,6 +15,8 @@ void	destroy_vars(t_vars *vars)
 	{
 		if (vars->coll != 0)
 			free(vars->coll);
+		if (vars->exit != 0)
+			free(vars->exit);
 		if (vars->map != 0)
 		{
 			i = 0;

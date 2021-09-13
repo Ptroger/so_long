@@ -10,7 +10,7 @@ void	init_vars(t_base *base, char *file)
 	base->vars->coll = 0;
 	base->vars->colls = 0;
 	base->vars->collected = 0;
-	base->vars->is_exit = 0;
+	base->vars->exits = 0;
 	base->vars->player_number = 0;
 	base->vars->player_move = 0;
 	base->vars->going_up = 0;

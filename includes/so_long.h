@@ -8,20 +8,19 @@
 #include "mlx.h"
 #include "libft.h"
 
-typedef struct	s_coord {
+typedef struct	s_point {
 	int x;
 	int y;
-}				t_coord;
+}				t_point;
 
 typedef struct s_vars
 {
 	int				**map;
 	int				height;
 	int				width;
-	t_coord			*coll;
+	int				exits;
 	int				colls;
 	int 			collected;
-	int				is_exit;
 	int				player_number;
 	int				going_up;
 	int				going_down;
@@ -29,14 +28,15 @@ typedef struct s_vars
 	int				going_right;
 	size_t 			is_moving;
 	int				player_move;
-	t_coord			player;
-	t_coord			exit;
+	t_point			*coll;
+	t_point			player;
+	t_point			*exit;
 }				t_vars;
 
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
-	int	init;
+	int		init;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -56,6 +56,7 @@ typedef struct	s_base {
 	t_vars	*vars;
 }				t_base;
 
+void	map_dimensions(t_base *base, char *file);
 void	init_tiles(t_base *base);
 void 	draw_tile(t_base *base, t_coord start, t_data *tile);
 void	my_mlx_pixel_put(t_data *img, int x, int y, unsigned int color);
@@ -64,9 +65,7 @@ void	init_map(t_base *base, char *file);
 void	destroy_base(t_base *base, char *err);
 void	destroy_vars(t_vars *vars);
 void	read_map(t_base *base, char *file);
-void	map_isvalid(t_base *base, char *file);
-void	map_width(t_base *base, char *file);
-void	map_height(t_base *base, char *file);
+void	check_map(t_base *base, char *file);
 t_base	*initialise(char *file);
 void	put_img(t_base *base);
 void	move_up(t_base *base);

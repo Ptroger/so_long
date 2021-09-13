@@ -1,6 +1,6 @@
 #include "../includes/so_long.h"
 
-void	put_vars(int i, int j, t_base *base, t_coord start)
+void	put_vars(int i, int j, t_base *base, t_point start)
 {
 	int	n;
 
@@ -18,7 +18,7 @@ void	put_map(t_base *base)
 {
 	int		i;
 	int		j;
-	t_coord	start;
+	t_point	start;
 
 	j = 0;
 	while (j < base->vars->height)

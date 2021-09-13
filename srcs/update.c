@@ -20,6 +20,20 @@ void	move_player(t_base *base)
 	}
 }
 
+void	is_exit(t_base *base)
+{
+	int	i;
+
+	i = 0;
+	while (i < base->vars->exits)
+	{
+		if (base->vars->player.x == base->vars->exit[i].x
+			&& base->vars->player.y == base->vars->exit[i].y)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 void	collect(t_base *base)
 {
 	int	i;
@@ -44,8 +58,7 @@ void	update(t_base *base)
 	base->vars->is_moving = 0;
 	collect(base);
 	put_img(base);
-	if (base->vars->player.x == base->vars->exit.x
-		&& base->vars->player.y == base->vars->exit.y)
+	if (is_exit(base) == 1)
 	{
 		if (base->vars->colls == base->vars->collected)
 			destroy_base(base, "finished");
