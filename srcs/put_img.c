@@ -32,7 +32,7 @@ void	put_map(t_base *base)
 		{
 			start.y = j * 64;
 			start.x = i * 64;
-			if (base->vars->map[j][i] == 1)
+			if (base->vars->map[i][j] == '1')
 				draw_tile(base, start, base->wall);
 			else
 				draw_tile(base, start, base->floor);

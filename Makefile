@@ -7,7 +7,7 @@ SRCS        =	srcs/so_long.c \
 				srcs/helpers.c \
 				srcs/initialize.c \
 				srcs/destroy_base.c \
-				srcs/map_isvalid.c \
+				srcs/check_map.c \
 				srcs/read_map.c \
 				srcs/put_img.c \
 				srcs/move.c \
