@@ -2,8 +2,8 @@
 
 void	move_up(t_base *base)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 	
 	x = base->vars->player.x;
 	y = base->vars->player.y;
@@ -16,8 +16,8 @@ void	move_up(t_base *base)
 
 void	move_down(t_base *base)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = base->vars->player.x;
 	y = base->vars->player.y;
@@ -30,8 +30,8 @@ void	move_down(t_base *base)
 
 void	move_left(t_base *base)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = base->vars->player.x;
 	y = base->vars->player.y;
@@ -45,7 +45,7 @@ void	move_left(t_base *base)
 void	move_right(t_base *base)
 {
 	int	x;
-	int y;
+	int	y;
 
 	x = base->vars->player.x;
 	y = base->vars->player.y;
