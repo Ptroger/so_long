@@ -26,8 +26,8 @@ int	main(int ac, char **av)
 	}
 	base = initialise(av[1]);
 	put_img(base);
-	mlx_hook(base->win, 17, 1L<<17, (int (*)()) close_win, base);
-	mlx_hook(base->win, 2, 1L<<0, (int (*)()) key_press, base);
-	mlx_hook(base->win, 3, 1L<<1, (int (*)()) key_release, base);
+	mlx_hook(base->win, 17, 1L<<17, ( int (*)()) close_win, base);
+	mlx_hook(base->win, 2, 1L<<0, ( int (*)()) key_press, base);
+	mlx_hook(base->win, 3, 1L<<1, ( int (*)()) key_release, base);
 	mlx_loop(base->mlx);
 }
