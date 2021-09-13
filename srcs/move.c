@@ -2,7 +2,7 @@
 
 void	move_up(t_base *base)
 {
-	int	x;
+	int x;
 	int y;
 	
 	x = base->vars->player.x;
@@ -16,7 +16,7 @@ void	move_up(t_base *base)
 
 void	move_down(t_base *base)
 {
-	int	x;
+	int x;
 	int y;
 
 	x = base->vars->player.x;
@@ -30,7 +30,7 @@ void	move_down(t_base *base)
 
 void	move_left(t_base *base)
 {
-	int	x;
+	int x;
 	int y;
 
 	x = base->vars->player.x;

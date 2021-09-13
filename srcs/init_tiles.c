@@ -16,6 +16,7 @@ void	put_tiles(t_base *base, char *path, t_data *tile)
 	{
 		tile->width = width;
 		tile->height = height;
+		tile->init = 1;
 	}
 }
 

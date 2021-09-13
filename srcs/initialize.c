@@ -21,37 +21,39 @@ void	init_vars(t_base *base, char *file)
 	init_map(base, file);
 }
 
-t_data	*initialise_data(t_base *base)
+t_data	*initialise_data(t_base *base, int i)
 {
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
-	data->img = mlx_new_image(base->mlx, WIDTH, HEIGHT);
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);
+	data->init = 0;
+	if (i == 0)
+	{
+		data->img = mlx_new_image(base->mlx, WIDTH, HEIGHT);
+		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);
+		data->init = 1;
+	}
 	return (data);
 }
 
 t_base	*initialise(char *file)
 {
 	t_base	*base;
-	void 	*win;
 
 	base = (struct s_base*)malloc(sizeof(t_base));
-	win = malloc(sizeof(void*));
 	(void)(file);
-	base->mlx = mlx_init();
-	base->win = win;
-	base->antouine = initialise_data(base);
-	printf("\n\n\n\nici 1\n\n\n\n\n");
-	base->exit = initialise_data(base);
-	printf("\n\n\n\nici 2\n\n\n\n\n");
-	base->floor = initialise_data(base);
-	printf("\n\n\n\nici 3\n\n\n\n\n");
-	base->trumpet = initialise_data(base);
-	base->wall = initialise_data(base);
-	base->img = initialise_data(base);
-	base->win = mlx_new_window(base->mlx, WIDTH, HEIGHT, "so_long");
-	init_tiles(base);
+	base->mlx = 0;
+	base->win = 0;
+	base->antouine = initialise_data(base, 1);
+	base->exit = initialise_data(base, 1);
+	base->floor = initialise_data(base, 1);
+	base->trumpet = initialise_data(base, 1);
+	base->wall = initialise_data(base, 1);
+	base->img = 0;
 	init_vars(base, file);
+	base->win = mlx_new_window(base->mlx, WIDTH, HEIGHT, "so_long");
+	base->mlx = mlx_init();
+	base->img = initialise_data(base, 0);
+	init_tiles(base);
 	return(base);
 }

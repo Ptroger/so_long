@@ -18,7 +18,6 @@ int	isber(char *file)
 int	main(int ac, char **av)
 {
 	t_base	*base;
-	printf("\n\n\n\nici\n\n\n\n\n");
 
 	if (ac != 2 || isber(av[1]) == 0)
 	{
@@ -27,8 +26,8 @@ int	main(int ac, char **av)
 	}
 	base = initialise(av[1]);
 	put_img(base);
-	mlx_hook(base->win, 17, 1L<<17, (int(*)())close_win, base);
-	mlx_hook(base->win, 2, 1L<<0, (int(*)())key_press, base);
-	mlx_hook(base->win, 3, 1L<<1, (int(*)())key_release, base);
+	mlx_hook(base->win, 17, 1L<<17, (int (*)()) close_win, base);
+	mlx_hook(base->win, 2, 1L<<0, (int (*)()) key_press, base);
+	mlx_hook(base->win, 3, 1L<<1, (int (*)()) key_release, base);
 	mlx_loop(base->mlx);
 }
