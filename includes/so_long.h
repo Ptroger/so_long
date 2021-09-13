@@ -58,7 +58,7 @@ typedef struct	s_base {
 
 void	map_dimensions(t_base *base, char *file);
 void	init_tiles(t_base *base);
-void 	draw_tile(t_base *base, t_coord start, t_data *tile);
+void 	draw_tile(t_base *base, t_point, t_data *tile);
 void	my_mlx_pixel_put(t_data *img, int x, int y, unsigned int color);
 unsigned int	get_pixel(t_data *tile, int x, int y);
 void	init_map(t_base *base, char *file);

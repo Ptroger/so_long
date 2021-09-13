@@ -3,14 +3,16 @@
 
 void	check_char(t_base *base, char c)
 {
-	if (c == 'P')
+	if (c == 'P' || c == 'E' || c == 'C' || c == '1'
+		|| c == '0')
+	{
+		if (c == 'P')
 		base->vars->player_number++;
-	else if (c == 'E')
+		else if (c == 'E')
 		base->vars->exits++;
-	else if (c == 'C')
+		else if (c == 'C')
 		base->vars->colls++;
-	else if (c == '1' || c == '0')
-		return
+	}
 	else
 		destroy_base(base, "wrong char");
 }
@@ -28,7 +30,7 @@ void	write_map(t_base *base, char *file)
 	{
 		while (++i < base->vars->width)
 		{
-			base->map[i][j] = file[n];
+			base->vars->map[i][j] = file[n];
 			n++;
 		}
 	}
