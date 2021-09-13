@@ -34,6 +34,7 @@ int	is_exit(t_base *base)
 	}
 	return (0);
 }
+
 void	collect(t_base *base)
 {
 	int	i;

@@ -20,15 +20,15 @@ void	get_h(t_base *base, char *file)
 
 	base->vars->height = 1;
 	i = base->vars->width + 1;
-	while (file[i] != 0)
+	while (file[i])
 	{
 		j = 0;
-		while (file[i + j] != 0 && file[i + j] != '\n')
+		while (file[i + j] && file[i + j] != '\n')
 			j++;
 		if (base->vars->width != j)
 		{
 			free(file);
-			destroy_base(base, "not rectangular");
+			destroy_base(base, "Invalid map disposition");
 		}
 		i += base->vars->width + 1;
 		base->vars->height++;

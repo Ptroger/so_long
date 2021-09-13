@@ -20,7 +20,7 @@ void	check_char(t_base *base, char c)
 void	write_map(t_base *base, char *file)
 {
 	int		i;
-	size_t		n;
+	size_t	n;
 	int		j;
 
 	j = -1;
@@ -31,7 +31,7 @@ void	write_map(t_base *base, char *file)
 		while (++i < base->vars->width && file[n])
 		{
 			if (file[n] == '\n')
-				n++;		
+				n++;
 			base->vars->map[i][j] = file[n];
 			n++;
 		}
@@ -43,7 +43,7 @@ void	check_wall(t_base *base, int i, int j)
 	if (base->vars->map[i][j] != '1')
 	{
 		if (j == 0 || j == base->vars->height - 1 || i == 0
-				|| i == base->vars->width - 1)
+		|| i == base->vars->width - 1)
 			destroy_base(base, "expected wall");
 	}
 }
