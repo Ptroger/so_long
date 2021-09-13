@@ -23,8 +23,8 @@ void	get_elem(t_base *base, int i, int j, int *colls, int *exits)
 	}
 	else if (base->vars->map[i][j] == 'E')
 	{
-		base->vars->exit[*exits].x = i);
-		base->vars->exit[*exits].y = j);
+		base->vars->exit[*exits].x = i;
+		base->vars->exit[*exits].y = j;
 		base->vars->map[i][j] = '0';
 		(*exits)++;
 	}
@@ -39,7 +39,7 @@ void	get_elem(t_base *base, int i, int j, int *colls, int *exits)
 
 void	parse_map(t_base *base)
 {
-	int	i:
+	int	i;
 	int	j;
 	int	colls;
 	int	exits;
@@ -48,9 +48,9 @@ void	parse_map(t_base *base)
 	exits = 0;
 	i = -1;
 	j = -1;
-	while (++j < base->map->height)
+	while (++j < base->vars->height)
 	{
-		while (++i < base->map->width)
+		while (++i < base->vars->width)
 			get_elem(base, i, j, &colls, &exits);
 	}
 }
@@ -67,7 +67,7 @@ void	alloc_map(t_base *base)
 	{
 		base->vars->map[i] = (int *)malloc(sizeof(int) * base->vars->height);
 		if (base->vars->map[i] == 0)
-			free_map(base, file, base->vars->map, i);
+			free_map(base, base->vars->map, i);
 	}
 }
 
@@ -75,7 +75,7 @@ void	read_map(t_base *base, char *file)
 {
 	map_dimensions(base, file);
 	alloc_map(base);
-	check_map(base);
+	check_map(base, file);
 	base->vars->coll
 		= (t_point *)malloc(sizeof(t_point) * base->vars->colls);
 	base->vars->exit
