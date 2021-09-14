@@ -8,6 +8,7 @@ void	init_vars(t_base *base, char *file)
 		destroy_base(base, "malloc failed");
 	base->vars->map = 0;
 	base->vars->coll = 0;
+	base->vars->exit = 0;
 	base->vars->colls = 0;
 	base->vars->collected = 0;
 	base->vars->exits = 0;
@@ -29,7 +30,8 @@ t_data	*initialise_data(t_base *base, int i)
 	data->init = 0;
 	if (i == 0)
 	{
-		data->img = mlx_new_image(base->mlx, WIDTH, HEIGHT);
+		data->img = mlx_new_image(base->mlx, base->vars->width * 64,
+				base->vars->height * 64);
 		data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 				&data->line_length, &data->endian);
 		data->init = 1;
@@ -52,7 +54,8 @@ t_base	*initialise(char *file)
 	base->img = 0;
 	init_vars(base, file);
 	base->mlx = mlx_init();
-	base->win = mlx_new_window(base->mlx, WIDTH, HEIGHT, "so_long");
+	base->win = mlx_new_window(base->mlx,
+			base->vars->width * 64, base->vars->height * 64, "so_long");
 	base->img = initialise_data(base, 0);
 	init_tiles(base);
 	return (base);

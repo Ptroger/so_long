@@ -3,13 +3,14 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-
-# include "mlx.h"
+# define TILE_WIDTH 64
+# define TILE_HEIGHT 64
+# include "../mlx/mlx.h"
 # include "libft.h"
 
-typedef struct	s_point {
-	int x;
-	int y;
+typedef struct s_point {
+	int	x;
+	int	y;
 }				t_point;
 
 typedef struct s_vars
@@ -19,7 +20,7 @@ typedef struct s_vars
 	int				width;
 	int				exits;
 	int				colls;
-	int 			collected;
+	int				collected;
 	int				player_number;
 	int				going_up;
 	int				going_down;
@@ -32,7 +33,7 @@ typedef struct s_vars
 	t_point			*exit;
 }				t_vars;
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	int		init;
@@ -41,9 +42,9 @@ typedef struct	s_data {
 	int		endian;
 	int		width;
 	int		height;
-}				t_data;
+}		t_data;
 
-typedef struct	s_base {
+typedef struct s_base {
 	void	*mlx;
 	void	*win;
 	t_data	*img;
@@ -53,7 +54,7 @@ typedef struct	s_base {
 	t_data	*exit;
 	t_data	*floor;
 	t_vars	*vars;
-}				t_base;
+}		t_base;
 
 void			map_dimensions(t_base *base, char *file);
 void			init_tiles(t_base *base);

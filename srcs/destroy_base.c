@@ -20,7 +20,7 @@ void	destroy_vars(t_vars *vars)
 		if (vars->map != 0)
 		{
 			i = 0;
-			while (i < vars->height)
+			while (i < vars->width)
 				free(vars->map[i++]);
 			free(vars->map);
 		}
@@ -35,6 +35,12 @@ void	destroy_image(void *mlx, t_data *data, char *err)
 		mlx_destroy_image(mlx, data->img);
 	free(data);
 }	
+
+void	destroy_mlx(void *mlx)
+{
+	mlx_destroy_display(mlx);
+	free(mlx);
+}
 
 void	destroy_base(t_base *base, char *err)
 {
@@ -55,7 +61,7 @@ void	destroy_base(t_base *base, char *err)
 		if (base->win != 0)
 			mlx_destroy_window(base->mlx, base->win);
 		if (base->mlx != 0)
-			mlx_destroy_display(base->mlx);
+			destroy_mlx(base->mlx);
 		if (base->vars != 0)
 			destroy_vars(base->vars);
 		free(base);

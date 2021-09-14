@@ -15,6 +15,11 @@ int	isber(char *file)
 	return (1);
 }
 
+void	routine(t_base *base)
+{
+	
+}
+
 int	main(int ac, char **av)
 {
 	t_base	*base;
@@ -25,9 +30,10 @@ int	main(int ac, char **av)
 		return (-1);
 	}
 	base = initialise(av[1]);
+	mlx_hook(base->win, 17, 1L << 17, &close_win, base);
+	mlx_hook(base->win, 2, 1L << 0, &key_press, base);
+	mlx_hook(base->win, 3, 1L << 1, &key_release, base);
 	put_img(base);
-	mlx_hook(base->win, 17, 1L << 17, (int (*)()) close_win, base);
-	mlx_hook(base->win, 2, 1L << 0, (int (*)()) key_press, base);
-	mlx_hook(base->win, 3, 1L << 1, (int (*)()) key_release, base);
 	mlx_loop(base->mlx);
+	//mlx_loop_hook(base->mlx, &routine, base);
 }

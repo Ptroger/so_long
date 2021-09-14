@@ -1,7 +1,7 @@
 #include "../includes/so_long.h"
 #include <stdlib.h>
 
-void	check_char(t_base *base, char c)
+void	check_char(t_base *base, char c, char *file)
 {
 	if (c == 'P' || c == 'E' || c == 'C' || c == '1'
 		|| c == '0')
@@ -14,7 +14,10 @@ void	check_char(t_base *base, char c)
 			base->vars->colls++;
 	}
 	else
+	{
+		free(file);
 		destroy_base(base, "wrong char");
+	}
 }
 
 void	write_map(t_base *base, char *file)
@@ -38,17 +41,20 @@ void	write_map(t_base *base, char *file)
 	}
 }
 
-void	check_wall(t_base *base, int i, int j)
+void	check_wall(t_base *base, int i, int j, char *file)
 {
 	if (base->vars->map[i][j] != '1')
 	{
 		if (j == 0 || j == base->vars->height - 1 || i == 0
-		|| i == base->vars->width - 1)
+			|| i == base->vars->width - 1)
+		{
+			free(file);
 			destroy_base(base, "expected wall");
+		}
 	}
 }
 
-void	map_isvalid(t_base *base)
+void	map_isvalid(t_base *base, char *file)
 {
 	int	i;
 	int	j;
@@ -59,8 +65,8 @@ void	map_isvalid(t_base *base)
 		i = -1;
 		while (++i < base->vars->width)
 		{
-			check_wall(base, i, j);
-			check_char(base, base->vars->map[i][j]);
+			check_wall(base, i, j, file);
+			check_char(base, base->vars->map[i][j], file);
 		}
 	}
 }
@@ -68,10 +74,12 @@ void	map_isvalid(t_base *base)
 void	check_map(t_base *base, char *file)
 {
 	write_map(base, file);
-	free(file);
-	map_isvalid(base);
+	map_isvalid(base, file);
 	if (base->vars->player_number != 1
 		|| base->vars->exits < 1
 		|| base->vars->colls < 1)
+	{
+		free(file);
 		destroy_base(base, "Game setup won't work");
+	}
 }

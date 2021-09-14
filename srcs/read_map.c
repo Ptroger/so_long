@@ -63,12 +63,12 @@ void	alloc_map(t_base *base)
 
 	i = -1;
 	base->vars->map = (int **)malloc(sizeof(int *) * base->vars->width);
-	if (base->vars->map == 0)
+	if (!base->vars->map)
 		destroy_base(base, "malloc failed");
 	while (++i < base->vars->width)
 	{
 		base->vars->map[i] = (int *)malloc(sizeof(int) * base->vars->height);
-		if (base->vars->map[i] == 0)
+		if (!base->vars->map[i])
 			free_map(base, base->vars->map, i);
 	}
 }

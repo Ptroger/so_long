@@ -40,23 +40,23 @@ _WHITE=$'\x1b[37m'
 
 all:			$(NAME)
 
-$(NAME):		$(MLX) $(OBJS)
-				@$(CC) ${FLAGS} $(INCLUDES) $(SRCS) -o ${NAME} ${LIBS} $(LIBFT)
+$(NAME):		$(MLX) $(LIBFT) $(OBJS)
+				$(CC) $(FLAGS) $(INCLUDES) $(OBJS) -o ${NAME} ${LIBS} $(LIBFT)
 
 $(MLX):
 				@$(MAKE) -C mlx
 				@echo $(_BOLD)$(_CYAN)"mlx compiled"
-				@$(MAKE) -C libft
+
+$(LIBFT):
+				@$(MAKE) -s -C libft
 
 clean:
-				@$(MAKE) -C mlx clean
-				@$(MAKE) -C libft clean
+				@$(MAKE) -s -C libft clean
 				@rm -rf $(OBJS) $(BONUS_OBJS)
-				@echo $(_BOLD)$(_PURPLE)"object files removed"
 
 fclean:			clean
-				@rm -rf $(NAME) $(MLX) $(LIBFT)
-				@echo $(_BOLD)$(_PURPLE)"binary removed"
+				@rm -rf $(NAME)
+				@$(MAKE) -s -C libft fclean
 
 re:				fclean $(NAME)
 

@@ -24,11 +24,11 @@ void	put_map(t_base *base)
 	int		j;
 	t_point	start;
 
-	j = 0;
-	while (j < base->vars->height)
+	j = -1;
+	while (++j < base->vars->height)
 	{
-		i = 0;
-		while (i < base->vars->width)
+		i = -1;
+		while (++i < base->vars->width)
 		{
 			start.y = j * 64;
 			start.x = i * 64;
@@ -37,9 +37,7 @@ void	put_map(t_base *base)
 			else
 				draw_tile(base, start, base->floor);
 			put_vars(i, j, base, start);
-			i++;
 		}
-		j++;
 	}
 }
 

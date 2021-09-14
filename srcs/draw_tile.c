@@ -6,18 +6,16 @@ void	draw_tile(t_base *base, t_point start, t_data *tile)
 	int				y;
 	unsigned int	color;
 
-	x = 0;
-	while (x < tile->width)
+	x = -1;
+	while (++x < 64)
 	{
-		y = 0;
-		while (y < tile->height)
+		y = -1;
+		while (++y < 64)
 		{
 			color = get_pixel(tile, x, y);
 			if (color != 0x000000)
 				my_mlx_pixel_put(base->img, (start.x) + x,
 					(start.y) + y, color);
-			y++;
 		}
-		x++;
 	}
 }
