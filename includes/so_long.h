@@ -72,9 +72,9 @@ void			move_up(t_base *base);
 void			move_left(t_base *base);
 void			move_down(t_base *base);
 void			move_right(t_base *base);
-void			key_press(int keycode, t_base *base);
-void			key_release(int keycode, t_base *base);
-void			close_win(t_base *base);
+int				key_press(int keycode, t_base *base);
+int				key_release(int keycode, t_base *base);
+int				close_win(t_base *base);
 void			update(t_base *base);
 
 #endif

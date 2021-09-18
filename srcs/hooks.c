@@ -1,11 +1,12 @@
 #include "../includes/so_long.h"
 
-void	close_win(t_base *base)
+int	close_win(t_base *base)
 {
 	destroy_base(base, "finished");
+	return (0);
 }
 
-void	key_press(int keycode, t_base *base)
+int	key_press(int keycode, t_base *base)
 {
 	if (keycode == 65307 || keycode == 119 || keycode == 115
 		|| keycode == 97 || keycode == 100)
@@ -22,9 +23,10 @@ void	key_press(int keycode, t_base *base)
 			base->vars->going_right = 1;
 		update(base);
 	}
+	return (0);
 }
 
-void	key_release(int keycode, t_base *base)
+int	key_release(int keycode, t_base *base)
 {
 	if (keycode == 119 || keycode == 115
 		|| keycode == 97 || keycode == 100)
@@ -38,4 +40,5 @@ void	key_release(int keycode, t_base *base)
 		else
 			base->vars->going_right = 0;
 	}
+	return (0);
 }
